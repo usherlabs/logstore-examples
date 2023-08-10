@@ -1,0 +1,17 @@
+{
+  "name": "logstore-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "query": "node src/query.js --run",
+    "store": "node src/store.js --run"
+  },
+  "dependencies": {
+    "@logsn/client": "^0.0.5",
+    "ethers": "^6.6.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
