@@ -14,9 +14,7 @@ const main = async () => {
       });
 
       // Create the default stream
-      const stream = await client.getStream({
-        id: `/logstore-demo`,
-      });
+      const stream = await client.getStream('/logstore-demo');
 
       const interval = setInterval(async () => {
         const message = {
