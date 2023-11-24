@@ -1,18 +1,17 @@
 {
-  "name": "logstore-demo",
+  "name": "logstore-examples",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "LogStore Examples",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "scripts": {
     "query": "node src/query.js --run",
     "store": "node src/store.js --run"
   },
   "dependencies": {
-    "@logsn/client": "^0.0.5",
+    "@logsn/client": "^0.0.8",
     "dotenv": "^16.3.1",
-    "ethers": "^6.6.2"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "ethers": "^6.8.1"
+  }
 }
