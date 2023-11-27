@@ -6,14 +6,14 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "query": "node src/query.js --run",
+    "query": "ts-node src/query.ts",
     "store": "node src/store.js --run",
     "listen": "ts-node src/listen.ts"
   },
   "dependencies": {
     "@logsn/client": "^0.0.8",
     "dotenv": "^16.3.1",
-    "ethers": "^6.8.1"
+    "ethers": "^5.7.2"
   },
   "devDependencies": {
     "ts-node": "^10.9.1",

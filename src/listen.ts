@@ -1,6 +1,6 @@
 import LogStoreClient, { CONFIG_TEST } from "@logsn/client";
 import "dotenv/config";
-import { Contract, ContractEventPayload, EventLog, JsonRpcProvider } from "ethers";
+import { Contract, providers } from "ethers";
 
 const devMode = process.env.DEV_MODE ?? false;
 const rpcUrl = process.env.RPC_URL ?? "https://polygon.llamarpc.com";
@@ -15,7 +15,7 @@ const contractAbi = [
 const STREAM_ID = '/lsan-events';
 
 async function main() {
-  const provider = new JsonRpcProvider(rpcUrl);
+  const provider = new providers.JsonRpcProvider(rpcUrl);
   const chainId = (await provider.getNetwork()).chainId.toString();
   const contract = new Contract(contractAddress, contractAbi, provider);
 
@@ -26,14 +26,14 @@ async function main() {
 
   const stream = await logStoreClient.getStream(STREAM_ID);
 
-  const publishEventLog = async (log: EventLog) => {
+  const publishEventLog = async (log: any) => {
     const message = {
       logStoreChainId: chainId,
       logStoreChannelId: "evm-validate",
       address: log.address,
       blockHash: log.blockHash,
       data: log.data,
-      index: log.index,
+      index: log.logIndex,
       topics: log.topics,
       transactionHash: log.transactionHash,
     };
@@ -45,12 +45,12 @@ async function main() {
   }
 
   await contract.on("Approval", async (...args: Array<any>) => {
-    const { log } = args[args.length - 1] as ContractEventPayload;
+    const log = args[args.length - 1];
     await publishEventLog(log);
   });
 
   await contract.on("Transfer", async (...args: Array<any>) => {
-    const { log } = args[args.length - 1] as ContractEventPayload;
+    const log = args[args.length - 1];
     await publishEventLog(log);
   });
 
