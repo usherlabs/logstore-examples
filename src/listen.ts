@@ -28,12 +28,12 @@ async function main() {
 
   const publishEventLog = async (log: any) => {
     const message = {
-      logStoreChainId: chainId,
-      logStoreChannelId: "evm-validate",
+      __logStoreChainId: chainId,
+      __logStoreChannelId: "evm-validate",
       address: log.address,
       blockHash: log.blockHash,
       data: log.data,
-      index: log.logIndex,
+      logIndex: log.logIndex,
       topics: log.topics,
       transactionHash: log.transactionHash,
     };
