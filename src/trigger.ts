@@ -4,6 +4,7 @@ import {
   // Contract,
   providers
 } from "ethers";
+import { EventMessage } from "./types";
 
 const devMode = process.env.DEV_MODE ?? false;
 const rpcUrl = process.env.RPC_URL ?? "https://polygon.llamarpc.com";
@@ -33,13 +34,13 @@ async function main() {
   const stream = await logStoreClient.getStream(STREAM_ID);
 
   const publishEventLog = async () => {
-    const message = {
+    const message: EventMessage = {
       __logStoreChainId: '137',
       __logStoreChannelId: 'evm-validate',
       address: '0x365Bdc64E2aDb50E43E56a53B7Cc438d48D0f0DD',
       blockHash: '0xed6afdb35db598ee08623a9564a5fab3a6e64fea6718c380e7c7342911a4d1a4',
       data: '0x0000000000000000000000000000000000000000000000000000000000000001',
-      index: 372,
+      logIndex: 372,
       topics: [
         '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
         '0x000000000000000000000000aeefa929280b17c81803727dcfb62c5fad511f31',

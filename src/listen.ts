@@ -1,6 +1,7 @@
 import LogStoreClient, { CONFIG_TEST } from "@logsn/client";
 import "dotenv/config";
 import { Contract, providers } from "ethers";
+import { EventMessage } from './types';
 
 const devMode = process.env.DEV_MODE ?? false;
 const rpcUrl = process.env.RPC_URL ?? "https://polygon.llamarpc.com";
@@ -29,14 +30,14 @@ async function main() {
 
   const stream = await logStoreClient.getStream(STREAM_ID);
 
-  const publishEventLog = async (log: any) => {
-    const message = {
+  const publishEventLog = async (log: providers.Log) => {
+    const message: EventMessage = {
       __logStoreChainId: chainId,
       __logStoreChannelId: "evm-validate",
       address: log.address,
       blockHash: log.blockHash,
       data: log.data,
-      index: log.logIndex,
+      logIndex: log.logIndex,
       topics: log.topics,
       transactionHash: log.transactionHash,
     };
