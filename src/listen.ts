@@ -12,7 +12,10 @@ const contractAbi = [
   "event Transfer(address indexed from, address indexed to, uint value)",
 ];
 
-const STREAM_ID = '/lsan-events';
+const STREAM_ID = `/${process.env.STREAMR_ID || 'lsan-events'}`;
+
+// Validation output stream can be found at https://streamr.network/hub/streams/0xeb21022d952e5de09c30bfda9e6352ffa95f67be%2Ftopics/overview
+// Transfer 0.000000000000000001 LSAN to demonstrate
 
 async function main() {
   const provider = new providers.JsonRpcProvider(rpcUrl);
