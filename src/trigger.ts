@@ -34,8 +34,8 @@ async function main() {
 
   const publishEventLog = async () => {
     const message = {
-      logStoreChainId: '137',
-      logStoreChannelId: 'evm-validate',
+      __logStoreChainId: '137',
+      __logStoreChannelId: 'evm-validate',
       address: '0x365Bdc64E2aDb50E43E56a53B7Cc438d48D0f0DD',
       blockHash: '0xed6afdb35db598ee08623a9564a5fab3a6e64fea6718c380e7c7342911a4d1a4',
       data: '0x0000000000000000000000000000000000000000000000000000000000000001',
