@@ -9,7 +9,7 @@
     "query": "node src/basic/query.js --run",
     "store": "node src/basic/store.js --run",
     "listen": "ts-node src/listen-to-contract/listen.ts",
-    "trigger": "ts-node src/trigger.ts"
+    "trigger": "ts-node src/listen-to-contract/trigger.ts"
   },
   "dependencies": {
     "@logsn/client": "^0.0.8",
