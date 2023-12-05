@@ -6,9 +6,9 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "query": "ts-node src/query.ts",
-    "store": "node src/store.js --run",
-    "listen": "ts-node src/listen.ts",
+    "query": "node src/basic/query.js --run",
+    "store": "node src/basic/store.js --run",
+    "listen": "ts-node src/listen-to-contract/listen.ts",
     "trigger": "ts-node src/trigger.ts"
   },
   "dependencies": {
@@ -17,6 +17,7 @@
     "ethers": "^5.7.2"
   },
   "devDependencies": {
+    "@types/node": "^18.15.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.3.2"
   }
