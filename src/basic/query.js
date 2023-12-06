@@ -1,7 +1,12 @@
 require('dotenv/config');
 const LogStoreClient = require("@logsn/client");
-const utils = require("./utils.js");
-const { PrivateKey } = require("./config.js");
+const utils = require("../basic/utils.js");
+const { PrivateKey } = require("../basic/config.js");
+
+/**
+ * Note: Remember to create and/or stake tokens on this stream for this example to work
+ */
+
 const main = async () => {
   utils.isValidPrivateKey(PrivateKey);
   // Create the client using the validated private key

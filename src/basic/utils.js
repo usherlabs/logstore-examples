@@ -1,5 +1,5 @@
 const { Wallet } = require("ethers");
-const { PrivateKey } = require("./config.js");
+const { PrivateKey } = require("../basic/config.js");
 module.exports = {
   isValidPrivateKey: (privateKey) => {
     try {
