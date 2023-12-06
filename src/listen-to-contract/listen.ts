@@ -1,7 +1,7 @@
 import LogStoreClient, { CONFIG_TEST } from "@logsn/client";
 import "dotenv/config";
 import { Contract, providers } from "ethers";
-import { EventMessage } from './types';
+import { EventMessage } from "../types";
 
 const devMode = process.env.DEV_MODE ?? false;
 const rpcUrl = process.env.RPC_URL ?? "https://polygon.llamarpc.com";
