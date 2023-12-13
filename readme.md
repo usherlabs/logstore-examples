@@ -6,7 +6,7 @@ This repository contains examples of creating or consuming data using the LogSto
 
 - `src/basic`: publish and query data from a simple stream
 - `src/listen-to-contract`: publish and query data from a stream that listens for smart contract events
-- `src/gas-station`: consuming data from the `Multi-Chain Gas Station`
+- `src/gas-station`: consuming data from the [Multi-Chain Gas Station](https://streamr.network/hub/projects/0x833774c6a6bcffdc67289895167d1190b738803502c89a451bbfd13076e4a61b/overview) public stream
 
 ## How to run it?
 
