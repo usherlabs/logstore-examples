@@ -21,7 +21,7 @@ This repository contains examples of creating or consuming data using the LogSto
 4. Push changes to GitHub.
 5. Create a pull request.
 
-Note: some of these examples require you to create and stake the stream before executing then
+Note: some of these examples require you to create and stake the stream before executing then. Find out how to do this using our [CLI](https://docs.logstore.usher.so/network/cli/getting-started).
 
 Check out our [documentation](https://docs.logstore.usher.so/) for more details about the LogStore
 
