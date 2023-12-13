@@ -10,7 +10,9 @@ This repository contains examples of creating or consuming data using the LogSto
 
 ## How to run it?
 
-Find the scripts inside `package.json`
+- install using your favourite package manager. e.g. `npm install`
+- copy `.env.example` to `.env` and fill in the required values
+- find and run scripts inside `package.json`
 
 ## How to contribute?
 1. Fork and clone the repository.
