@@ -1,2 +1,7 @@
 .env
 node_modules
+
+# lock files so this project can be used with any package manager
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
