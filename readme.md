@@ -1,4 +1,4 @@
-![Cover image](https://github.com/usherlabs/logstore-mirror/raw/master/assets/readmes/logstore-cover.png)
+![Cover image](https://github.com/usherlabs/logstore/raw/master/assets/readmes/logstore-cover.png)
 
 # Log Store Examples
 
@@ -10,7 +10,7 @@ This repository contains examples of creating or consuming data using the LogSto
 
 ## How to run it?
 
-- install using your favourite package manager. e.g. `npm install`
+- install using your favorite package manager. e.g., `npm install`
 - copy `.env.example` to `.env` and fill in the required values
 - find and run scripts inside `package.json`
 
@@ -21,7 +21,7 @@ This repository contains examples of creating or consuming data using the LogSto
 4. Push changes to GitHub.
 5. Create a pull request.
 
-Note: some of these examples require you to create and stake the stream before executing then. Find out how to do this using our [CLI](https://docs.logstore.usher.so/network/cli/getting-started).
+Note: some of these examples require you to create and stake the stream before executing it. Find out how to do this using our [CLI](https://docs.logstore.usher.so/network/cli/getting-started).
 
 Check out our [documentation](https://docs.logstore.usher.so/) for more details about the LogStore
 
