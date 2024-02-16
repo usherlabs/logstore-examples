@@ -3,6 +3,7 @@
  */
 
 import 'dotenv/config';
+import 'disposablestack/auto';
 import { StreamrClient } from 'streamr-client';
 import utils from './utils';
 import { PrivateKey, StreamId } from '../config';
@@ -14,11 +15,19 @@ const main = async () => {
 			utils.isValidPrivateKey(PrivateKey);
 			// Create the client using the validated private key
 			const client = new StreamrClient({
+				logLevel: 'error',
 				auth: {
 					privateKey: PrivateKey,
 				},
 			});
 			const lsClient = new LogStoreClient(client);
+
+			// Here we cleanup the streamr connections
+			await using cleanup = new AsyncDisposableStack();
+			cleanup.defer(async () => {
+				lsClient.destroy();
+				await client.destroy();
+			});
 
 			// Create the default stream
 			const stream = await client.getOrCreateStream({

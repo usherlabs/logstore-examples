@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import 'disposablestack/auto';
 import { LogStoreClient } from '@logsn/client';
 import { StreamrClient } from 'streamr-client';
 import utils from './utils';
@@ -8,16 +9,26 @@ import { PrivateKey, StreamId } from '../config';
  * ? Note: Remember to create and/or stake tokens on this stream for this example to work
  */
 
+process.env.LOG_LEVEL = 'error';
+
 const main = async () => {
 	utils.isValidPrivateKey(PrivateKey);
 	// Create the client using the validated private key
 	const client = new StreamrClient({
+		logLevel: 'error',
 		auth: {
 			privateKey: PrivateKey,
 		},
 	});
 
 	const lsClient = new LogStoreClient(client);
+
+	// Here we cleanup the streamr connections
+	using cleanup = new DisposableStack();
+	cleanup.defer(() => {
+		lsClient.destroy();
+		client.destroy();
+	});
 
 	// Create the default stream
 	const stream = await client.getOrCreateStream({
@@ -35,21 +46,21 @@ const main = async () => {
 	// ensure that the stream is being stored!
 	console.log('Stream fetched:', stream.id);
 
-	await client.subscribe(
-		{
-			stream: stream.id,
-			resend: {
-				// should see the recently send messages, along with 3 identical ones from storage
-				last: 6,
-			},
-		},
-		(message) => {
-			// Do something with the messages as they are received
-			console.log(JSON.stringify(message));
-		}
-	);
+	// await client.subscribe(
+	// 	{
+	// 		stream: stream.id,
+	// 		resend: {
+	// 			// should see the recently send messages, along with 3 identical ones from storage
+	// 			last: 6,
+	// 		},
+	// 	},
+	// 	(message) => {
+	// 		// Do something with the messages as they are received
+	// 		console.log(JSON.stringify(message));
+	// 	}
+	// );
 
-	console.log('Subscribed to stream:', stream.id);
+	// console.log('Subscribed to stream:', stream.id);
 
 	await stream.publish({ id: 0 });
 	await stream.publish({ id: 1 });
@@ -66,6 +77,7 @@ const main = async () => {
 		(message) => {
 			// Do something with the messages as they are received
 			console.log(JSON.stringify(message));
+			console.log(message);
 		}
 	);
 	console.log('Queried stream from Log Store:', stream.id);

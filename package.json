@@ -6,18 +6,19 @@
 	"author": "",
 	"license": "ISC",
 	"scripts": {
-		"query": "ts-node src/basic/query.ts",
-		"store": "ts-node src/basic/store.ts",
-		"listen": "ts-node src/listen-to-contract/listen.ts",
-		"trigger": "ts-node src/listen-to-contract/trigger.ts",
-		"gas-station:query": "ts-node src/gas-station/query.ts",
-		"terminal-chat:publish-data": "ts-node src/terminal-chat/createDataOnStream.ts",
-		"terminal-chat:query-subscribe": "ts-node src/terminal-chat/queryAndSubscribe.ts",
-		"terminal-chat:query-verify": "ts-node src/terminal-chat/queryAndVerify.ts",
+		"query": "tsx src/basic/query.ts",
+		"store": "tsx src/basic/store.ts",
+		"listen": "tsx src/listen-to-contract/listen.ts",
+		"trigger": "tsx src/listen-to-contract/trigger.ts",
+		"gas-station:query": "tsx src/gas-station/query.ts",
+		"terminal-chat:publish-data": "tsx src/terminal-chat/createDataOnStream.ts",
+		"terminal-chat:query-subscribe": "tsx src/terminal-chat/queryAndSubscribe.ts",
+		"terminal-chat:query-verify": "tsx src/terminal-chat/queryAndVerify.ts",
 		"format": "prettier --write \"**/*.{ts,tsx,json}\""
 	},
 	"dependencies": {
 		"@logsn/client": "^0.0.14",
+		"disposablestack": "^1.1.3",
 		"dotenv": "^16.3.1",
 		"ethers": "^5.7.2",
 		"streamr-client": "^8.5.5"
@@ -26,7 +27,7 @@
 		"@trivago/prettier-plugin-sort-imports": "^4.3.0",
 		"@types/node": "^18.15.3",
 		"prettier": "^3.2.5",
-		"ts-node": "^10.9.1",
+		"tsx": "^4.7.1",
 		"typescript": "^5.3.2"
 	}
 }
