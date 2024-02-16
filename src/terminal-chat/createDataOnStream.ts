@@ -1,7 +1,7 @@
 import { StreamrClient } from 'streamr-client';
 import * as os from 'os';
 import * as fs from 'fs';
-import { StreamId } from '../config';}
+import { StreamId } from '../config';
 
 // getting privateKey from the cli configuration, we could get from .env
 const homeDir = os.homedir();
