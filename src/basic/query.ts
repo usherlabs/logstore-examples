@@ -1,8 +1,8 @@
 import 'dotenv/config';
 import { LogStoreClient } from '@logsn/client';
-import StreamrClient from 'streamr-client';
+import { StreamrClient } from 'streamr-client';
 import utils from './utils';
-import { PrivateKey, StreamId } from './config';
+import { PrivateKey, StreamId } from '../config';
 
 /**
  * ? Note: Remember to create and/or stake tokens on this stream for this example to work
@@ -23,13 +23,14 @@ const main = async () => {
 	const stream = await client.getOrCreateStream({
 		id: `/${StreamId || `logstore-demo`}`,
 	});
-	// const stream = await client.getOrCreateStream({
-	//   id: `0xa156eda7dcd689ac725ce9595d4505bf28256454/heartbeat`,
-	// });
 
-	await stream.publish({ id: 0 });
-	await stream.publish({ id: 1 });
-	await stream.publish({ id: 2 });
+	const isStore = await lsClient.isLogStoreStream(stream.id);
+	if (!isStore) {
+		console.log(
+			`Stream is not registered in Log Store Netowrk. Use LogStore CLI to register a store. -- logstore store stake ${stream.id} 0.01 -u`
+		);
+		return;
+	}
 
 	// ensure that the stream is being stored!
 	console.log('Stream fetched:', stream.id);
@@ -48,7 +49,13 @@ const main = async () => {
 		}
 	);
 
-	console.log('Subscribing to stream:', stream.id);
+	console.log('Subscribed to stream:', stream.id);
+
+	await stream.publish({ id: 0 });
+	await stream.publish({ id: 1 });
+	await stream.publish({ id: 2 });
+
+	console.log('Published messages to stream:', stream.id);
 
 	await lsClient.query(
 		stream.id,
@@ -61,7 +68,6 @@ const main = async () => {
 			console.log(JSON.stringify(message));
 		}
 	);
-
 	console.log('Queried stream from Log Store:', stream.id);
 };
 

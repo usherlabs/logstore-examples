@@ -1,7 +1,8 @@
 import { LogStoreClient } from '@logsn/client';
 import os from 'os';
 import * as fs from 'fs';
-import StreamrClient from 'streamr-client';
+import { StreamrClient } from 'streamr-client';
+import { StreamId } from '../config';
 
 // getting privateKey from the cli configuration, we could get from .env
 const homeDir = os.homedir();
@@ -18,7 +19,7 @@ const client = new StreamrClient({
 
 const lsClient = new LogStoreClient(client);
 
-const streamIdOrPath = `0xd95083fbf72897f8a6607f27891e814b29d843b3/tutorial_1_wiehqew`;
+const streamIdOrPath = `/${StreamId || `logstore-demo`}`;
 
 async function main() {
 	console.log('Querying stream for last 2 messages...');

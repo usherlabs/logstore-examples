@@ -3,9 +3,10 @@
  */
 
 import 'dotenv/config';
-import StreamrClient from 'streamr-client';
+import { StreamrClient } from 'streamr-client';
 import utils from './utils';
-import { PrivateKey, StreamId } from './config';
+import { PrivateKey, StreamId } from '../config';
+import LogStoreClient from '@logsn/client';
 
 const main = async () => {
 	return new Promise(async (resolve, reject) => {
@@ -17,9 +18,20 @@ const main = async () => {
 					privateKey: PrivateKey,
 				},
 			});
+			const lsClient = new LogStoreClient(client);
 
 			// Create the default stream
-			const stream = await client.getStream(`/${StreamId || `logstore-demo`}`);
+			const stream = await client.getOrCreateStream({
+				id: `/${StreamId || `logstore-demo`}`,
+			});
+
+			const isStore = await lsClient.isLogStoreStream(stream.id);
+			if (!isStore) {
+				console.log(
+					`Stream is not registered in Log Store Netowrk. Use LogStore CLI to register a store. -- logstore store stake ${stream.id} 0.01 -u`
+				);
+				return;
+			}
 
 			const interval = setInterval(async () => {
 				const message = {

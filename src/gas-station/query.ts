@@ -2,7 +2,7 @@ import { LogStoreClient } from '@logsn/client';
 import * as fs from 'fs';
 import os from 'os';
 import { ethers } from 'ethers';
-import StreamrClient from 'streamr-client';
+import { StreamrClient } from 'streamr-client';
 
 const homeDir = os.homedir();
 const { privateKey } = JSON.parse(

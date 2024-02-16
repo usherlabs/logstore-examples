@@ -4,7 +4,7 @@ import {
 	providers,
 } from 'ethers';
 import { EventMessage } from '../types';
-import StreamrClient from 'streamr-client';
+import { StreamrClient } from 'streamr-client';
 import { config } from './config';
 
 const rpcUrl = process.env.RPC_URL ?? 'https://polygon.llamarpc.com';
