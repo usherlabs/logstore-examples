@@ -1,28 +1,32 @@
 {
-  "name": "logstore-examples",
-  "version": "1.0.0",
-  "description": "LogStore Examples",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "scripts": {
-    "query": "node src/basic/query.js --run",
-    "store": "node src/basic/store.js --run",
-    "listen": "ts-node src/listen-to-contract/listen.ts",
-    "trigger": "ts-node src/listen-to-contract/trigger.ts",
-    "gas-station:query": "ts-node src/gas-station/query.ts",
-    "terminal-chat:publish-data": "ts-node src/terminal-chat/createDataOnStream.ts",
-    "terminal-chat:query-subscribe": "ts-node src/terminal-chat/queryAndSubscribe.ts",
-    "terminal-chat:query-verify": "ts-node src/terminal-chat/queryAndVerify.ts"
-  },
-  "dependencies": {
-    "@logsn/client": "^0.0.9",
-    "dotenv": "^16.3.1",
-    "ethers": "^5.7.2"
-  },
-  "devDependencies": {
-    "@types/node": "^18.15.3",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.3.2"
-  }
+	"name": "logstore-examples",
+	"version": "1.0.0",
+	"description": "LogStore Examples",
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"scripts": {
+		"query": "ts-node src/basic/query.ts",
+		"store": "ts-node src/basic/store.ts",
+		"listen": "ts-node src/listen-to-contract/listen.ts",
+		"trigger": "ts-node src/listen-to-contract/trigger.ts",
+		"gas-station:query": "ts-node src/gas-station/query.ts",
+		"terminal-chat:publish-data": "ts-node src/terminal-chat/createDataOnStream.ts",
+		"terminal-chat:query-subscribe": "ts-node src/terminal-chat/queryAndSubscribe.ts",
+		"terminal-chat:query-verify": "ts-node src/terminal-chat/queryAndVerify.ts",
+		"format": "prettier --write \"**/*.{ts,tsx,json}\""
+	},
+	"dependencies": {
+		"@logsn/client": "^0.0.14",
+		"dotenv": "^16.3.1",
+		"ethers": "^5.7.2",
+		"streamr-client": "^8.5.5"
+	},
+	"devDependencies": {
+		"@trivago/prettier-plugin-sort-imports": "^4.3.0",
+		"@types/node": "^18.15.3",
+		"prettier": "^3.2.5",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.3.2"
+	}
 }
