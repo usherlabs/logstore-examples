@@ -10,6 +10,8 @@ import { PrivateKey, StreamId } from '../config';
 import LogStoreClient from '@logsn/client';
 
 const main = async () => {
+	// Here we define a cleanup to be run when the promise is finished
+	const cleanup = new AsyncDisposableStack();
 	return new Promise(async (resolve, reject) => {
 		try {
 			utils.isValidPrivateKey(PrivateKey);
@@ -22,8 +24,7 @@ const main = async () => {
 			});
 			const lsClient = new LogStoreClient(client);
 
-			// Here we cleanup the streamr connections
-			await using cleanup = new AsyncDisposableStack();
+			// Add the client to the cleanup stack
 			cleanup.defer(async () => {
 				lsClient.destroy();
 				await client.destroy();
@@ -49,12 +50,17 @@ const main = async () => {
 				};
 				await client.publish(stream, message);
 				console.log('Sent successfully: ', message);
-				resolve({ client, interval });
 			}, 1000);
+
+			// Cleanup on graceful exit
+			process.on('SIGINT', () => {
+				clearInterval(interval);
+				resolve({ client, interval });
+			});
 		} catch (e) {
 			reject(e);
 		}
-	});
+	}).finally(() => cleanup.disposeAsync());
 };
 
 main();
