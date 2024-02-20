@@ -14,14 +14,36 @@ This repository contains examples of creating or consuming data using the LogSto
 - copy `.env.example` to `.env` and fill in the required values
 - find and run scripts inside `package.json`
 
+Note: After using the `LogStoreClient` or the `StreamrClient`, it's important to destroy them to avoid memory leaks. You are also able to perform this action by using the [Explicit Resource Management feature](https://github.com/tc39/proposal-explicit-resource-management).
+
+Example:
+```ts
+const yourFn = async () => {
+	const client = new StreamrClient(streamrOptions);
+	const lsClient = new LogStoreClient(client);
+
+	// Here we cleanup the streamr connections
+	using cleanup = new DisposableStack();
+	cleanup.defer(() => {
+		lsClient.destroy();
+		client.destroy();
+	});
+	// operations as normally
+}; // -- at the end of this scope, the cleanup will be called
+```
+
 ## How to contribute?
+
 1. Fork and clone the repository.
 2. Create a new branch.
 3. Make and commit your changes.
 4. Push changes to GitHub.
 5. Create a pull request.
 
-Note: some of these examples require you to create and stake the stream before executing it. Find out how to do this using our [CLI](https://docs.logstore.usher.so/network/cli/getting-started).
+Notes:
+
+- Some of these examples require you to create and stake the stream before executing it. Find out how to do this using our [CLI](https://docs.logstore.usher.so/network/cli/getting-started).
+- Log Levels: see `.env.example` for details about `LOG_LEVEL` variable.
 
 Check out our [documentation](https://docs.logstore.usher.so/) for more details about the LogStore
 
