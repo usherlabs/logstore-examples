@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import 'disposablestack/auto';
+
 import { LogStoreClient } from '@logsn/client';
 import { StreamrClient } from 'streamr-client';
 import utils from './utils';

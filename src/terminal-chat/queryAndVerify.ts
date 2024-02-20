@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import { StreamrClient } from 'streamr-client';
 import { LogStoreClient } from '@logsn/client';
 import os from 'os';
@@ -45,7 +47,9 @@ const streamIdOrPath = `/${StreamId || `logstore-demo`}`;
 	for await (const event of response) {
 		console.log(event.content);
 	}
-
+})().finally(async () => {
+	lsClient.destroy();
+	await client.destroy();
 	console.log('Exiting!');
 	process.exit(0);
-})();
+});

@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import { StreamrClient } from 'streamr-client';
 import * as os from 'os';
 import * as fs from 'fs';
@@ -47,6 +49,7 @@ async function main() {
 main();
 
 // terminate on 'ctrl + c'
-process.on('SIGINT', function () {
+process.on('SIGINT', async function () {
+	await client.destroy();
 	process.exit(0);
 });

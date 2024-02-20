@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import { LogStoreClient } from '@logsn/client';
 import os from 'os';
 import * as fs from 'fs';
@@ -47,6 +49,8 @@ async function main() {
 main();
 
 // exit on 'ctrl + c'
-process.on('SIGINT', function () {
+process.on('SIGINT', async function () {
+	lsClient.destroy();
+	await client.destroy();
 	process.exit(0);
 });
