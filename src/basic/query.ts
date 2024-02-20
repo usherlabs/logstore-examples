@@ -68,18 +68,23 @@ const main = async () => {
 
 	console.log('Published messages to stream:', stream.id);
 
-	await lsClient.query(
-		stream.id,
-		{
-			// should see the recently send messages, along with 3 identical ones from storage
-			last: 6,
-		},
-		(message) => {
-			// Do something with the messages as they are received
-			console.log(JSON.stringify(message));
-			console.log(message);
-		}
-	);
+	const messageStream = await lsClient.query(stream.id, {
+		// should see the recently send messages, along with 3 identical ones from storage
+		last: 6,
+		// Note: Messages can also be consumed using a callback function.
+		// However, it's important to understand that the 'query' method does not wait for all messages to be processed.
+		// Instead, the completion of message processing is determined by the consumption of the 'messageStream'.
+		// Here's an example of how to use a callback function:
+		// (messageContent) => {
+		// 	console.log(messageContent);
+		// }
+	});
+
+	for await (const message of messageStream) {
+		// Do something with the messages as they are received
+		console.log(JSON.stringify(message.content));
+		console.log(message.content);
+	}
 	console.log('Queried stream from Log Store:', stream.id);
 };
 
